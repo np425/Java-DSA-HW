@@ -12,6 +12,7 @@ public class InputReader {
         System.out.print(axisIdentifier + "=");
         while (!scanner.hasNext() || !scanner.hasNextInt()) {
             System.out.print(axisIdentifier + "=");
+            scanner.nextLine();
         }
 
         return scanner.nextInt();

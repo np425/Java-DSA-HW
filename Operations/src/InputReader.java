@@ -10,9 +10,9 @@ public class InputReader {
 
     private static int readAxisValue(Scanner scanner, String axisIdentifier) {
         System.out.print(axisIdentifier + "=");
-        while (!scanner.hasNext() || !scanner.hasNextInt()) {
+        while (!scanner.hasNextInt()) {
             System.out.print(axisIdentifier + "=");
-            scanner.nextLine();
+            scanner.next();
         }
 
         return scanner.nextInt();

@@ -18,7 +18,7 @@ public class JapaneseCalendar {
         return (CYCLE_LENGTH - ((REF_CYCLE_START - year) - 1) % CYCLE_LENGTH);
     }
 
-    private String calculateCycleColor(int cycleYear) {
+    private static String calculateCycleColor(int cycleYear) {
         int lastDigit = cycleYear % 10;
 
         return switch (lastDigit) {

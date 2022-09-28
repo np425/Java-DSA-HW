@@ -6,9 +6,6 @@ public class Main {
 
         int year = InputReader.readYear(scanner);
 
-        JapaneseCalendar calendar = new JapaneseCalendar(year);
-
-        System.out.println("Cycle year: " + calendar.getCycleYear());
-        System.out.println("Colour: " + calendar.getColour());
+        System.out.println("Colour: " + JapaneseCalendar.yearToColor(year));
     }
 }

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -10,7 +11,7 @@ public class Main {
         ArrayList<Integer> armstrongNumbers;
 
         try {
-            armstrongNumbers = ArmstrongNumbers.getArmstrongNumbersInRange(rangeEnd);
+            armstrongNumbers = ArmstrongNumbers.getArmstrongNumbersInRange(Settings.RANGE_START, rangeEnd);
         } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
             return;

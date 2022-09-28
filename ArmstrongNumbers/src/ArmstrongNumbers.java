@@ -1,31 +1,41 @@
 import java.util.ArrayList;
 
 public class ArmstrongNumbers {
-    public static ArrayList<Integer> getArmstrongNumbersInRange(int rangeEnd) throws IndexOutOfBoundsException {
-        if (rangeEnd < 100 || rangeEnd > 999) {
-            throw new IndexOutOfBoundsException("Number must have exactly 3 digits");
-        }
+    public static ArrayList<Integer> getArmstrongNumbersInRange(int rangeStart, int rangeEnd) {
+        ArrayList<Integer> armstrongNumbers = new ArrayList<>();
 
-        ArrayList<Integer> arr = new ArrayList<>();
-        for (int i = 100; i <= rangeEnd; ++i) {
+        for (int i = rangeStart; i <= rangeEnd; ++i) {
             if (isArmstrongNumber(i)) {
-                arr.add(i);
+                armstrongNumbers.add(i);
             }
         }
-        return arr;
-    }
 
-    private static int calcArmstrongDigitSum(int number) {
-        int sum = 0;
+        return armstrongNumbers;
+    }
+    private static ArrayList<Integer> intToDigits(int number) {
+        ArrayList<Integer> digits = new ArrayList<>();
+
         do {
-            sum += Math.pow(number % 10, 3);
+            digits.add(number % 10);
             number /= 10;
         } while (number != 0);
+
+        return digits;
+    }
+
+    private static int calcArmstrongDigitSum(ArrayList<Integer> digits) {
+        int sum = 0;
+        int power = digits.size();
+
+        for (int digit : digits) {
+            sum += Math.pow(digit, power);
+        }
+
         return sum;
     }
 
     private static boolean isArmstrongNumber(int number) {
-        return calcArmstrongDigitSum(number) == number;
+        ArrayList<Integer> digits = intToDigits(number);
+        return calcArmstrongDigitSum(digits) == number;
     }
-
 }

@@ -22,7 +22,7 @@ public class Main {
             return;
         }
 
-        for (int number: armstrongNumbers) {
+        for (int number : armstrongNumbers) {
             System.out.println(number);
         }
     }

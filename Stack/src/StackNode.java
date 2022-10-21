@@ -27,7 +27,7 @@ public class StackNode<T> {
             ++i;
         }
 
-        return i == n ? node : null;
+        return node;
     }
 
     public StackNode<T> findNode(T value) {

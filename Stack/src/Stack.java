@@ -2,7 +2,6 @@ public class Stack<T> {
     private class Node {
         T value;
         Node prev;
-
         Node(T value) {
             this.value = value;
         }
@@ -33,14 +32,10 @@ public class Stack<T> {
     private Node lastNode = null;
     private int length = 0;
 
-    public void add(T value) {
-        if (this.lastNode != null) {
-            Node node = new Node(value);
-            node.prev = this.lastNode;
-            this.lastNode = node;
-        } else {
-            this.lastNode = new Node(value);
-        }
+    public void push(T value) {
+        Node node = new Node(value);
+        node.prev = this.lastNode;
+        this.lastNode = node;
 
         ++this.length;
     }

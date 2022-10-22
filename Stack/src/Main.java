@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<>();
-        stack.add(2);
-        stack.add(3);
-        stack.add(4);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
 
         System.out.println(stack.contains(3));
 

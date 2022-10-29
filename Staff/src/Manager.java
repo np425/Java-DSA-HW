@@ -5,8 +5,9 @@ public class Manager extends Employee {
         super(name, surname, phone, socialInsuranceNumber, monthlyWage);
     }
 
-    public void awardBonus(double bonus) {
+    public Manager awardBonus(double bonus) {
         this.bonus += bonus;
+        return this;
     }
 
     @Override

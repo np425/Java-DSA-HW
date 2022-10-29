@@ -11,24 +11,14 @@ public class Firm {
         staff.addStaffMember(
                 new Trainee("John", "Cena", "123")
         );
-
-        Manager manager = new Manager("John", "Xina", "123", 321, 3.0);
-        manager.awardBonus(150);
         staff.addStaffMember(
-                manager
+                new Manager("John", "Xina", "123", 321, 3.0).awardBonus(150)
         );
-
-
-        HourlyWorker hourlyWorker = new HourlyWorker("WorkerA", "Cena", "123", 321, 4.0);
-        hourlyWorker.addHours(10);
         staff.addStaffMember(
-                hourlyWorker
+                new HourlyWorker("WorkerA", "Cena", "123", 321, 4.0).addHours(10)
         );
-
-        HourlyWorker hourlyWorker1 = new HourlyWorker("WorkerB", "Cena", "123", 321, 5.0);
-        hourlyWorker1.addHours(20);
         staff.addStaffMember(
-                hourlyWorker1
+                new HourlyWorker("WorkerB", "Cena", "123", 321, 5.0).addHours(20)
         );
 
         return staff;

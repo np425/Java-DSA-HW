@@ -5,8 +5,9 @@ public class HourlyWorker extends Employee {
         super(name, surname, phone, socialInsuranceNumber, monthlyWage);
     }
 
-    public void addHours(int hoursWorked) {
+    public HourlyWorker addHours(int hoursWorked) {
         this.hoursWorked += hoursWorked;
+        return this;
     }
 
     @Override

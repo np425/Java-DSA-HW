@@ -36,6 +36,7 @@ public class Main {
 
         System.out.println("------------------------");
 
-        AnimalLookup.findAnimal(animals, "FishB").forEach(System.out::println);
+
+        AnimalLookup.findAnimals(animals, "FishB").forEach(System.out::println);
     }
 }

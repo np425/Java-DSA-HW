@@ -2,6 +2,7 @@ public class Stack<T> {
     private class Node {
         T value;
         Node prev;
+
         Node(T value) {
             this.value = value;
         }

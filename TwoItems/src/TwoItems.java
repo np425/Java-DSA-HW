@@ -24,4 +24,8 @@ public class TwoItems<A, B> {
         this.second = secondItem;
     }
 
+    @Override
+    public String toString() {
+        return this.first.toString() + " " + this.second.toString();
+    }
 }

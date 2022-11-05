@@ -9,6 +9,8 @@ public class Main {
         fraction.setNumerator(numerator);
         fraction.setInteger(integer);
 
+        System.out.println(new Fraction(1, -45, 30).toDouble());
+
         fraction = new Fraction(numerator, denominator);
         System.out.println(fraction);
 

@@ -114,7 +114,7 @@ public class Fraction {
     }
 
     public double toDouble() throws ArithmeticException {
-        return this.integer * (this.numerator / (double) this.denominator);
+        return this.integer + (this.numerator / (double) this.denominator);
     }
 
     private void simplify() throws ArithmeticException {

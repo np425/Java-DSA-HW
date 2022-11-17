@@ -1,5 +1,5 @@
-public class BinarySingleValueTree<T extends Comparable<T>, N extends Node<T>> {
-    private N root;
+public class BinarySingleValueTree<T extends Comparable<T>> implements BinaryTree<T> {
+    private NodeSingleValue<T> root;
     private int length = 0;
 
     public void add(T data) {
@@ -18,81 +18,74 @@ public class BinarySingleValueTree<T extends Comparable<T>, N extends Node<T>> {
         this.print(this.root);
     }
 
-    private void print(N node) {
+    private void print(NodeSingleValue<T> node) {
         if (node == null) {
             return;
         }
 
-        print(node.getLower());
+        print(node.lower);
 
         System.out.println(node);
 
-        print(node.getHigher());
+        print(node.higher);
     }
 
-    private N add(T data, N node) {
+    private NodeSingleValue<T> add(T value, NodeSingleValue<T> node) {
         if (node == null) {
             this.length = this.length + 1;
-            return new N(data);
+            return new NodeSingleValue<>(value);
         }
 
-        int cmp = data.compareTo(node.getValue());
+        int cmp = value.compareTo(node.value);
 
         if (cmp < 0) {
-            node.setLower(this.add(data, (N) node.getLower()));
+            node.lower = this.add(value, node.lower);
         } else if (cmp > 0) {
-            node.setHigher(this.add(data, node.getHigher()));
-        } else {
-            node.setValue(data);
+            node.higher = this.add(value, node.higher);
         }
 
         return node;
     }
 
 
-    private N remove(T data, N node) {
+    private NodeSingleValue<T> remove(T value, NodeSingleValue<T> node) {
         if (node == null) {
             return null;
         }
 
-        int cmp = data.compareTo(node.getValue());
+        int cmp = value.compareTo(node.value);
 
         if (cmp < 0) {
-            node.setLower(this.remove(data, node.getLower()));
+            node.lower = this.remove(value, node.lower);
         } else if (cmp > 0) {
-            node.setHigher(this.remove(data, node.getHigher()));
+            node.higher = this.remove(value, node.higher);
         } else {
             this.length = this.length - 1;
-            node.removeValue();
 
-            if (node.hasValue()) {
-                return node;
+            if (node.higher == null) {
+                return node.lower;
             }
 
-            if (node.getHigher() == null) {
-                return node.getLower();
+            if (node.lower == null) {
+                return node.higher;
             }
 
-            if (node.getLower() == null) {
-                return node.getHigher();
-            }
-
-            node.setValue(lowestValue(root.getHigher()));
-            root.setHigher(remove(node.getValue(), root.getHigher()));
+            node.value = lowestValue(root.higher);
+            root.higher = remove(node.value, root.higher);
         }
 
         return node;
     }
 
-    private T lowestValue(N node) {
+    private T lowestValue(NodeSingleValue<T> node) {
         if (node == null) {
             return null;
         }
 
-        while (node.getLower() != null) {
-            node = node.getLower();
+        while (node.lower != null) {
+            node = node.lower;
         }
 
-        return node.getValue();
+        return node.value;
     }
 }

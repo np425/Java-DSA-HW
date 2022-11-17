@@ -18,7 +18,7 @@ public class BinaryMultiValueTree<T extends Comparable<T>> implements BinaryTree
         this.print(this.root);
     }
 
-    private void print(NodeSingleValue<T> node) {
+    private void print(NodeMultiValue<T> node) {
         if (node == null) {
             return;
         }
@@ -30,39 +30,45 @@ public class BinaryMultiValueTree<T extends Comparable<T>> implements BinaryTree
         print(node.higher);
     }
 
-    private NodeMultiValue<T> add(T data, NodeMultiValue<T> node) {
+    private NodeMultiValue<T> add(T value, NodeMultiValue<T> node) {
         if (node == null) {
             this.length = this.length + 1;
-            return new NodeMultiValue<>(data);
+            return new NodeMultiValue<>(value);
         }
 
-        int cmp = data.compareTo(node.value);
+        int cmp = value.compareTo(node.getValue());
 
         if (cmp < 0) {
-            node.lower = this.add(data, node.lower);
+            node.lower = this.add(value, node.lower);
         } else if (cmp > 0) {
-            node.higher = this.add(data, node.higher);
+            node.higher = this.add(value, node.higher);
         } else {
-            node.addValue(data);
+            node.setValue(value);
         }
 
         return node;
     }
 
 
-    private NodeSingleValue<T> remove(T data, NodeSingleValue<T> node) {
+    private NodeMultiValue<T> remove(T value, NodeMultiValue<T> node) {
         if (node == null) {
             return null;
         }
 
-        int cmp = data.compareTo(node.value);
+        T nodeValue = node.getValue();
+        int cmp = value.compareTo(nodeValue);
 
         if (cmp < 0) {
-            node.lower = this.remove(data, node.lower);
+            node.lower = this.remove(value, node.lower);
         } else if (cmp > 0) {
-            node.higher = this.remove(data, node.higher);
+            node.higher = this.remove(value, node.higher);
         } else {
             this.length = this.length - 1;
+
+            node.removeValue();
+            if (node.getLength() > 0) {
+                return node;
+            }
 
             if (node.higher == null) {
                 return node.lower;
@@ -72,14 +78,17 @@ public class BinaryMultiValueTree<T extends Comparable<T>> implements BinaryTree
                 return node.higher;
             }
 
-            node.value = lowestValue(root.higher);
-            root.higher = remove(node.value, root.higher);
+            NodeMultiValue<T> lowestNode = lowestNode(root.higher);
+            node.setValue(lowestNode.getValue());
+            node.setLength(lowestNode.getLength());
+
+            root.higher = remove(nodeValue, root.higher);
         }
 
         return node;
     }
 
-    private T lowestValue(NodeSingleValue<T> node) {
+    private NodeMultiValue<T> lowestNode(NodeMultiValue<T> node) {
         if (node == null) {
             return null;
         }
@@ -88,6 +97,6 @@ public class BinaryMultiValueTree<T extends Comparable<T>> implements BinaryTree
             node = node.lower;
         }
 
-        return node.value;
+        return node;
     }
 }

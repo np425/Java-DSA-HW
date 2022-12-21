@@ -1,6 +1,10 @@
+import java.util.stream.Collectors;
+
 public class Main {
+    private static final int SET_SIZE = 10;
+
     public static void main(String[] args) {
-        FixedSizeHashSet<String> set = new FixedSizeHashSet<>(16);
+        FixedSizeHashSet<String> set = new FixedSizeHashSet<>(SET_SIZE);
 
         set.put("Labas");
         set.put("Viso");
@@ -14,29 +18,31 @@ public class Main {
         set.put("Jonas");
         set.put("Zilvinas");
 
+        System.out.println("After adding elements:");
         printHashSet(set);
 
         System.out.println("Zilvinas is in set: " + set.contains("Zilvinas"));
 
         set.remove("Zilvinas");
 
+        System.out.println("After removing elements:");
         printHashSet(set);
 
         System.out.println("Zilvinas is in set: " + set.contains("Zilvinas"));
     }
 
-    private static void printHashSet(FixedSizeHashSet<?> set) {
-        System.out.println("------------------ Set items list beginning");
+    private static <T> void printHashSet(FixedSizeHashSet<T> set) {
+        System.out.println("-------------- Items in set beginning");
 
-        for (Object e : set.getItems()) {
-            if (e == null) {
-                System.out.println("NULL");
-                continue;
-            }
-            System.out.println(e);
-        }
+        String delimitedItems = set.getItems()
+                .stream()
+                .map(list -> list.stream()
+                        .map(T::toString)
+                        .collect(Collectors.joining(", ")))
+                .collect(Collectors.joining("\n"));
 
-        System.out.println("------------------ Set items list end");
+        System.out.println(delimitedItems);
+        System.out.println("-------------- Items in set end");
     }
 
 }

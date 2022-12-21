@@ -34,6 +34,8 @@ public class Main {
     private static <T> void printHashSet(FixedSizeHashSet<T> set) {
         System.out.println("-------------- Items in set beginning");
 
+        // FIXME: Performance issues due to allocations for each inner list when producing comma delimited string
+        // SOLUTION: Just print it out like a normal human being
         String delimitedItems = set.getItems()
                 .stream()
                 .map(list -> list.stream()
